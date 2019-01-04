@@ -4,12 +4,10 @@ require 'base64'
 
 module Timekit
   class Client
-    def initialize(app = nil, authorization = nil)
-      @app = app || Timekit.config[:app]
-      @authorization = authorization || Timekit.config[:credentials]
+    def initialize(server_key: Timekit.config[:server_key])
+      @server_key = server_key
 
-      raise 'No app configured' if @app.nil?
-      raise 'No authorization configured' if @authorization.nil?
+      raise 'No server key configured' if server_key.nil?
     end
 
     protected
@@ -21,7 +19,6 @@ module Timekit
       define_method(verb) do |path, params = {}|
         # puts "Timekit::Client::#{verb} => #{path}#{token}"
         headers = {
-          'Timekit-App' => @app,
           'Authorization' => http_basic_auth_header
         }
 
@@ -37,10 +34,7 @@ module Timekit
     private
 
     def http_basic_auth_header
-      encoded = Base64.strict_encode64(
-        "#{@authorization.email}:#{@authorization.api_token}"
-      )
-
+      encoded = Base64.strict_encode64(":#{@server_key}")
       "Basic #{encoded}"
     end
   end

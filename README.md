@@ -14,53 +14,60 @@
 [coveralls]: https://coveralls.io/r/mgauthier/timekit
 [inchpages]: http://inch-ci.org/github/mgauthier/timekit
 
-
 A Ruby interface to the Timekit API.
 
 ## Installation
+
     gem install timekit
 
 ## Configuration
+
 Configure the Timekit client before using it
 
 ```ruby
-Timekit.configure({
-  app       : 'your-app-name',
-  email     : 'user@example.com',
-  api_token : 'your-api-token'
-})
+Timekit.configure(
+  server_key: 'api_key_...',
+  client_key: 'widget_key_...',
+)
 ```
 
 ## Documentation
+
 [http://developers.timekit.io/docs]
 
 ## Usage Examples
+
 After configuring Timekit you can initialize a `client`,
 and then you can do the following.
 
 ### Apps
 
 **Initialize your client**
+
 ```ruby
 client = Timekit.app_client
 ```
 
 **List**
+
 ```ruby
 client.list
 ```
 
 **Create**
+
 ```ruby
 client.create('app-name')
 ```
 
 **Update**
+
 ```ruby
 client.update('app-slug')
 ```
 
 **Delete**
+
 ```ruby
 client.delete('app-slug')
 ```
@@ -68,21 +75,25 @@ client.delete('app-slug')
 ### Bookings
 
 **Initialize your client**
+
 ```ruby
 client = Timekit.booking_client
 ```
 
 **List**
+
 ```ruby
 client.list
 ```
 
 **Show**
+
 ```ruby
 client.show('booking-id')
 ```
 
 **Create**
+
 ```ruby
 client.create(
   'booking-graph-type', # 'confirm-decline'
@@ -106,6 +117,7 @@ client.create(
 ```
 
 **Update**
+
 ```ruby
 client.update('booking-id', 'confirm')
 ```
@@ -119,16 +131,19 @@ client = Timekit.calendar_client
 ```
 
 **List**
+
 ```ruby
 client.list
 ```
 
 **Show**
+
 ```ruby
 client.show('calendar-id')
 ```
 
 **Create**
+
 ```ruby
 client.create(
   'calendar-name',
@@ -142,10 +157,10 @@ client.create(
 Not yet implemented
 
 **Delete**
+
 ```ruby
 client.delete('calendar-id')
 ```
-
 
 ### Credentials
 
@@ -156,11 +171,13 @@ client = Timekit.credential_client
 ```
 
 **List**
+
 ```ruby
 client.list
 ```
 
 **Create**
+
 ```ruby
 client.create(
   'credential-type',
@@ -172,6 +189,7 @@ client.create(
 ```
 
 **Delete**
+
 ```ruby
 client.delete('credential-id')
 ```
@@ -185,6 +203,7 @@ client = Timekit.event_client
 ```
 
 **List**
+
 ```ruby
 client.list(
   'start-time',
@@ -193,11 +212,13 @@ client.list(
 ```
 
 **Show**
+
 ```ruby
 client.show('event-id')
 ```
 
 **Create**
+
 ```ruby
 client.create(
   'event-start',
@@ -229,6 +250,7 @@ client.update(
 ```
 
 **Delete**
+
 ```ruby
 client.delete('event-id')
 ```
@@ -250,11 +272,13 @@ client = Timekit.user_client
 ```
 
 **Me**
+
 ```ruby
 client.me
 ```
 
 **Timezone**
+
 ```ruby
 client.timezone('user-email')
 ```
@@ -271,6 +295,7 @@ client.update(
 ```
 
 **Reset Password**
+
 ```ruby
 client.reset_password('user-email')
 ```
@@ -284,16 +309,19 @@ client = Timekit.widget_client
 ```
 
 **List**
+
 ```ruby
 client.list
 ```
 
 **Embed**
+
 ```ruby
 client.embed('widget-id')
 ```
 
 **Hosted**
+
 ```ruby
 client.hosted('widget-id')
 ```
@@ -308,7 +336,6 @@ client.create(
 )
 ```
 
-
 **Update**
 
 ```ruby
@@ -321,18 +348,19 @@ client.update(
 ```
 
 **Delete**
+
 ```ruby
 client.delete('widget-id')
 ```
 
-
 ## Supported Ruby Versions
+
 This library aims to support and is [tested against][travis] the following Ruby
 versions:
 
-* Ruby 2.1
-* Ruby 2.2
-* Ruby 2.3
+- Ruby 2.1
+- Ruby 2.2
+- Ruby 2.3
 
 If something doesn't work on one of these versions, it's a bug.
 
@@ -348,6 +376,7 @@ exist at the time of a major release, support for that Ruby version may be
 dropped.
 
 ## Versioning
+
 This library aims to adhere to [Semantic Versioning 2.0.0][semver]. Violations
 of this scheme should be reported as bugs. Specifically, if a minor or patch
 version is released that breaks backward compatibility, that version should be
@@ -363,6 +392,7 @@ Constraint][pvc] with two digits of precision. For example:
 [pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
 
 ## Copyright
+
 Copyright (c) 20016-2016 Michael Gauthier
 See [LICENSE][] for details.
 

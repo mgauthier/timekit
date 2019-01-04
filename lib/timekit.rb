@@ -2,7 +2,6 @@
 
 require_relative './timekit/config'
 require_relative './timekit/client'
-require_relative './timekit/authorization'
 require_relative './timekit/user'
 require_relative './timekit/credential'
 require_relative './timekit/app'
@@ -23,47 +22,45 @@ module Timekit
     @config
   end
 
-  def self.configure(configurations)
-    config[:app] = configurations[:app] if configurations[:app]
-
-    email = configurations[:email]
-    token = configurations[:api_token]
-    return unless email && token
-
-    config[:credentials] = Timekit::Authorization.new(
-      email, token
-    )
+  def self.configure(server_key:, client_key: nil)
+    config[:server_key] = server_key
+    config[:client_key] = client_key unless client_key.nil?
+    config
   end
 
   def self.calendar_client
-    Timekit::Calendar::Client.new(config[:app], config[:credentials])
+    Timekit::Calendar::Client.new
   end
 
   def self.app_client
-    Timekit::App::Client.new(config[:app], config[:credentials])
+    Timekit::App::Client.new
   end
 
   def self.credential_client
-    Timekit::Credential::Client.new(config[:app], config[:credentials])
+    Timekit::Credential::Client.new
   end
 
   def self.event_client
-    Timekit::Event::Client.new(config[:app], config[:credentials])
+    Timekit::Event::Client.new
   end
 
   def self.user_client
-    Timekit::User::Client.new(config[:app], config[:credentials])
+    Timekit::User::Client.new
   end
 
   def self.findtime_client
-    Timekit::Findtime::Client.new(config[:app], config[:credentials])
+    Timekit::Findtime::Client.new
   end
 
   def self.widget_client
-    Timekit::Widget::Client.new(config[:app], config[:credentials])
+    Timekit::Widget::Client.new
   end
 
   def self.booking_client
-    Timekit::Booking::Client.new(config[:app], config[:credentials])
+    Timekit::Booking::Client.new
+  end
+
+  def self.project_client
+    Timekit::Project::Client.new
   end
 end

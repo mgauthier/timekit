@@ -11,12 +11,12 @@ module Timekit
 
     # @return [Integer]
     def minor
-      2
+      3
     end
 
     # @return [Integer]
     def patch
-      6
+      0
     end
 
     # @return [Integer, NilClass]
